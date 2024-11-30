@@ -1,0 +1,8 @@
+[workspace]
+resolver = "2"
+
+members = [
+    "aoc2024",
+    "aoc-rust-utils",
+    "day1"
+]

@@ -1,0 +1,3 @@
+[submodule "aoc-rust-utils"]
+	path = aoc-rust-utils
+	url = git@github.com:timothyjrogers/aoc-rust-utils.git
