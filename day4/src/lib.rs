@@ -156,8 +156,6 @@ fn get_corners(position: &(usize, usize), x_max: usize, y_max: usize) -> Vec<(us
 
 #[cfg(test)]
 mod tests {
-    use std::os::raw;
-
     use super::*;
 
     #[test]
