@@ -4,7 +4,7 @@ fn main() {
     day3::solve();
     day4::solve();
     day5::solve();
-    //day6::solve();
+    day6::solve();
     //day7::solve();
     //day8::solve();
     //day9::solve();
