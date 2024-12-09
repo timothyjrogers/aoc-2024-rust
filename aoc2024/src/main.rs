@@ -15,7 +15,7 @@ fn main() {
         day6::solve();
         day7::solve();
         day8::solve();
-        //day9::solve();
+        day9::solve();
         //day10::solve();
         //day11::solve();
         //day12::solve();
@@ -48,5 +48,7 @@ fn main() {
         day7::solve();
     } else if day == 8 {
         day8::solve();
+    } else if day == 9 {
+        day9::solve();
     }
 }
