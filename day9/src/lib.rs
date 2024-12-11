@@ -1,3 +1,5 @@
+use std::time::Instant;
+
 const INPUT_FILE: &str = "input9.txt";
 
 #[derive(Clone, PartialEq, Eq)]
@@ -45,6 +47,7 @@ impl File {
 }
 
 pub fn solve() {
+    let mut start = Instant::now();
     let raw_input: String = aoc_utils::input::load_input_line(INPUT_FILE);
     let parsed_input: Vec<u64> = raw_input.chars().map(|s| s.to_string().parse::<u64>().unwrap()).collect();
     let mut disk_map: Vec<Block> = Vec::new();
@@ -67,8 +70,17 @@ pub fn solve() {
             file_map.push(File::new(FileType::EMPTY, *file_length, 0));
         }
     }
+
+    let setup_time = start.elapsed();
+    println!("Setup: {:.2?}", setup_time);
+    start = Instant::now();
     solve_part_one(&mut disk_map.clone());
+    let p1_time = start.elapsed();
+    println!("Part 1: {:.2?}", setup_time + p1_time);
+    start = Instant::now();
     solve_part_two(&mut file_map.clone());
+    let p2_time = start.elapsed();
+    println!("Part 2: {:.2?}", setup_time + p2_time);
 }
 
 fn solve_part_one(disk_map: &mut Vec<Block>) {

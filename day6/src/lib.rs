@@ -1,23 +1,34 @@
 use std::collections::HashSet;
+use std::time::Instant;
 
 const INPUT_FILE: &str = "input6.txt";
 
 pub fn solve() {
+    let mut start = Instant::now();
     let raw_input: Vec<String> = aoc_utils::input::load_input_lines(INPUT_FILE);
     let mut grid: Vec<Vec<char>> = Vec::new();
-    let mut start: (char, usize, usize) = ('^', 0, 0);
+    let mut start_point: (char, usize, usize) = ('^', 0, 0);
     for (y, line) in raw_input.iter().enumerate() {
         let mut row: Vec<char> = Vec::new();
         for (x, c) in line.chars().enumerate() {
             if c == '^' {
-                start = ('^', x, y)
+                start_point = ('^', x, y)
             }
             row.push(c);
         }
         grid.push(row);
     }
-    solve_part_one(&grid, start);
-    solve_part_two(&mut grid, start);
+
+    let setup_time = start.elapsed();
+    println!("Setup: {:.2?}", setup_time);
+    start = Instant::now();
+    solve_part_one(&grid, start_point);
+    let p1_time = start.elapsed();
+    println!("Part 1: {:.2?}", setup_time + p1_time);
+    start = Instant::now();
+    solve_part_two(&mut grid, start_point);
+    let p2_time = start.elapsed();
+    println!("Part 2: {:.2?}", setup_time + p2_time);
 }
 
 fn solve_part_one(grid: &Vec<Vec<char>>, start: (char, usize, usize)) {

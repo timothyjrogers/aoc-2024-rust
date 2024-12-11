@@ -1,17 +1,28 @@
 use std::collections::HashMap;
+use std::time::Instant;
+
 const INPUT_FILE: &str = "input11.txt";
 
 pub fn solve() {
+    let mut start = Instant::now();
     let raw_input: String = aoc_utils::input::load_input_line(INPUT_FILE);
     let mut input: Vec<u64> = raw_input.split(" ").map(|s| s.parse::<u64>().unwrap()).collect();
-
-    solve_part_one(&mut input);
-
     let mut hashed_input: HashMap<u64, u64>  = HashMap::new();
     for stone in raw_input.split(" ").map(|s| s.parse::<u64>().unwrap()) {
         hashed_input.entry(stone).or_insert(1);
     }
+
+    let setup_time = start.elapsed();
+    println!("Setup: {:.2?}", setup_time);
+    start = Instant::now();
+    solve_part_one(&mut input);
+    let p1_time = start.elapsed();
+    println!("Part 1: {:.2?}", setup_time + p1_time);
+    start = Instant::now();
+
     solve_part_two(hashed_input);
+    let p2_time = start.elapsed();
+    println!("Part 2: {:.2?}", setup_time + p2_time);
 }
 
 fn solve_part_one(input: &mut Vec<u64>) {

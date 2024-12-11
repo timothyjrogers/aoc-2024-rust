@@ -1,14 +1,25 @@
 use std::collections::HashMap;
+use std::time::Instant;
 
 const INPUT_FILE: &str = "input4.txt";
 
 pub fn solve() {
+    let mut start = Instant::now();
     let raw_input: Vec<String> = aoc_utils::input::load_input_lines(INPUT_FILE);
     let y_max = raw_input.len();
     let x_max = raw_input.get(0).unwrap().len();
     let points = map_char_points(raw_input);
+
+    let setup_time = start.elapsed();
+    println!("Setup: {:.2?}", setup_time);
+    start = Instant::now();
     solve_part_one(&points, x_max, y_max);
+    let p1_time = start.elapsed();
+    println!("Part 1: {:.2?}", setup_time + p1_time);
+    start = Instant::now();
     solve_part_two(&points, x_max, y_max);
+    let p2_time = start.elapsed();
+    println!("Part 2: {:.2?}", setup_time + p2_time);
 }
 
 fn solve_part_one(points: &HashMap<(usize,usize), char>, x_max: usize, y_max: usize) {

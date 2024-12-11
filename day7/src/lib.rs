@@ -1,8 +1,10 @@
 use std::collections::VecDeque;
+use std::time::Instant;
 
 const INPUT_FILE: &str = "input7.txt";
 
 pub fn solve() {
+    let mut start = Instant::now();
     let raw_input: Vec<String> = aoc_utils::input::load_input_lines(INPUT_FILE);
     let mut cases: Vec<(u64, VecDeque<u64>)> = Vec::new();
     for line in raw_input {
@@ -11,8 +13,17 @@ pub fn solve() {
         let values: VecDeque<u64> = parts.get(1).unwrap().split(" ").map(|s| s.parse::<u64>().unwrap()).collect();
         cases.push((target, values));
     }
+
+    let setup_time = start.elapsed();
+    println!("Setup: {:.2?}", setup_time);
+    start = Instant::now();
     solve_part_one(cases.clone());
+    let p1_time = start.elapsed();
+    println!("Part 1: {:.2?}", setup_time + p1_time);
+    start = Instant::now();
     solve_part_two(cases.clone());
+    let p2_time = start.elapsed();
+    println!("Part 2: {:.2?}", setup_time + p2_time);
 }
 
 fn solve_part_one(cases: Vec<(u64, VecDeque<u64>)>) {

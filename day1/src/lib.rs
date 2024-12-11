@@ -1,8 +1,10 @@
 use std::collections::HashSet;
+use std::time::Instant;
 
 const INPUT_FILE: &str = "input1.txt";
 
 pub fn solve() {
+    let mut start = Instant::now();
     let raw_input: Vec<String> = aoc_utils::input::load_input_lines(INPUT_FILE);
 
     let mut left_group: Vec<u32> = Vec::new();
@@ -15,8 +17,16 @@ pub fn solve() {
     left_group.sort();
     right_group.sort();
 
+    let setup_time = start.elapsed();
+    println!("Setup: {:.2?}", setup_time);
+    start = Instant::now();
     solve_part_one(&left_group, &right_group);
+    let p1_time = start.elapsed();
+    println!("Part 1: {:.2?}", setup_time + p1_time);
+    start = Instant::now();
     solve_part_two(&left_group, &right_group);
+    let p2_time = start.elapsed();
+    println!("Part 2: {:.2?}", setup_time + p2_time);
 }
 
 fn solve_part_one(left_group: &Vec<u32>, right_group: &Vec<u32>) {

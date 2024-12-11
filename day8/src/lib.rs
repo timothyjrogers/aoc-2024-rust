@@ -1,9 +1,11 @@
 use std::collections::{HashMap, HashSet};
 use std::cmp::{min, max};
+use std::time::Instant;
 
 const INPUT_FILE: &str = "input8.txt";
 
 pub fn solve() {
+    let mut start = Instant::now();
     let raw_input: Vec<String> = aoc_utils::input::load_input_lines(INPUT_FILE);
     //let grid: HashMap<(isize,isize), char> = HashMap::new();
     let x_max = raw_input.get(0).unwrap().len() as isize;
@@ -23,8 +25,17 @@ pub fn solve() {
             }
         }
     }
+
+    let setup_time = start.elapsed();
+    println!("Setup: {:.2?}", setup_time);
+    start = Instant::now();
     solve_part_one(&antennas, x_max, y_max);
+    let p1_time = start.elapsed();
+    println!("Part 1: {:.2?}", setup_time + p1_time);
+    start = Instant::now();
     solve_part_two(&antennas, x_max, y_max);
+    let p2_time = start.elapsed();
+    println!("Part 2: {:.2?}", setup_time + p2_time);
 }
 
 fn solve_part_one(antennas: &HashMap<char, Vec<(isize, isize)>>, x_max: isize, y_max: isize) {
